@@ -1,0 +1,28 @@
+language: python
+sudo: false
+python:
+  - "2.7"
+addons:
+  apt:
+    packages:
+      - libblas-dev
+      - liblapack-dev
+      - gfortran
+before_install:
+  - pip install -U pip
+install:
+  - travis_wait travis_retry pip install -r requirements.txt
+  - travis_wait pip install -U git+git://github.com/Theano/Theano.git
+  - travis_retry pip install coveralls
+  - travis_retry python setup.py develop
+script: nosetests --with-theanoinit --with-coverage --cover-package=teafacto
+after_success:
+  - coveralls
+cache:
+  - apt
+  - directories:
+    - $HOME/.cache/pip
+    - $HOME/.theano
+notifications:
+  slack: eisbonn:qosRnEbOef7JTnLqe8hf3rP7
+  email: false

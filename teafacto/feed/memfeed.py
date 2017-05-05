@@ -1,0 +1,1 @@
+from teafacto.feed.langtransform import WordToWordCharTransform

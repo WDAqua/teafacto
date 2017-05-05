@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+import argparse, argcomplete
+
+argparser = argparse.ArgumentParser()
+argcomplete.autocomplete(argparser)
+args = argparser.parse_args()
+print args
+
+if len(args) < 2:
+    raise Exception("must at least provide script name")
+
+scriptname = args[1]
+scriptargs = " ".join(args[2:])
+
+print(scriptname, scriptargs)
